@@ -1,0 +1,17 @@
+<view class="goods_list">
+  <SearchInput></SearchInput>
+  <Tabs tabs="{{tabs}}" bindhandleTab="handleTab">
+    <!-- <block wx:for="{{tabs}}" wx:if="{{item.isActive}}">{{item.id}}</block> -->
+  </Tabs>
+  <scroll-view class="goods_content" scroll-y refresher-enabled refresher-triggered="{{refresherTriggered}}" bindrefresherrefresh="refresherrefresh" bindscrolltolower="scrolltolower">
+    <navigator class="goods_box" wx:for="{{goodsList}}" url="/pages/goods_detail/goods_detail?goods_id={{item.goods_id}}">
+      <view class="goods_img">
+        <image src="{{item.goods_small_logo || 'https://ww1.sinaimg.cn/large/007rAy9hgy1g24by9t530j30i20i2glm.jpg'}}" mode="widthFix" />
+      </view>
+      <view class="goods_info">
+        <view class="goods_title">{{item.goods_name}}</view>
+        <view class="goods_price">￥{{item.goods_price}}</view>
+      </view>
+    </navigator>
+  </scroll-view>
+</view>

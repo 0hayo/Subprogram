@@ -1,0 +1,36 @@
+.goods_list{
+  .goods_content{
+    width: 100%;
+    height: calc(100vh - 180rpx);
+    .goods_box{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      .goods_img{
+        flex: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        image{
+          width: 70%;
+        }
+      }
+      .goods_info{
+        flex: 3;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-around;
+        .goods_title{
+          display: -webkit-box;
+          overflow: hidden;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+        .goods_price{
+          color: var(--themeColor);
+          font-size: 32rpx;
+        }
+      }
+    }
+  }
+}
