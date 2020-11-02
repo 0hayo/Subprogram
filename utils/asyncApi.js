@@ -36,3 +36,47 @@ export const openSetting = () => {
     });
   })
 }
+
+export const showModal = ({content}) => {
+  return new Promise((resovle, reject) => {
+    wx.showModal({
+      content: content,
+      showCancel: true,
+      title: '提示',
+      success: (result) => {
+        resovle(result)
+      },
+      fail: (err) => {
+        reject(err)
+      }
+    })
+  })
+}
+
+export const showToast = ({title}) => {
+  return new Promise((resovle, reject) => {
+    wx.showToast({
+      title: title,
+      icon: 'none',
+      duration: 1500,
+      mask: false,
+      success: (result)=>{
+        resovle(result)
+      }
+    });
+  })
+}
+
+export const login = () => {
+  return new Promise((resovle, reject) => {
+    wx.login({
+      timeout:10000,
+      success: (result)=>{
+        resovle(result)
+      },
+      fail: (err)=>{
+        reject(err)
+      }
+    });
+  })
+}

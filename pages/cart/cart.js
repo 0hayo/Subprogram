@@ -1,4 +1,4 @@
-import { getSetting, chooseAddress, openSetting } from '../../utils/asyncApi'
+import { getSetting, chooseAddress, openSetting, showModal, showToast } from '../../utils/asyncApi'
 import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
 
@@ -78,12 +78,33 @@ Page({
     this.setCart(cartList)
   },
 
-  handleAddCart(e) {
+  async handleAddCart(e) {
     const id = e.currentTarget.dataset.id
     const i = e.currentTarget.dataset.step
     const {cartList} = this.data
+    const index = cartList.findIndex(v => v.goods_id === id)
+    if(cartList[index].num === 1 && i === -1){
+      const res = await showModal({content: "确定删除该商品？"})
+      if(res.confirm) {
+        cartList.splice(index, 1)
+        this.setCart(cartList)
+      }
+    }
     cartList.forEach(v => v.goods_id === id && v.num + i > 0 && (v.num += i))
     this.setCart(cartList)
+  },
+
+  async handleSubmit() {
+    const {address, totalNum} = this.data
+    if(!address.userName) {
+      await showToast({title: "请填写收货信息"})
+      return
+    }
+    if(totalNum == 0){
+      await showToast({title: "请勾选商品"})
+      return
+    }
+    wx.navigateTo({url: '/pages/pay/pay'});
   }
   
 })

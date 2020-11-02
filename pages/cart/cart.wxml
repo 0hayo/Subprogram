@@ -14,32 +14,37 @@
   <view class="cart_contetn">
     <view class="cart_title">购物车</view>
     <view class="cart_main">
-      <view class="cart_item" wx:for="{{cartList}}">
-        <!-- 复选框 -->
-        <view class="checkbox">
-          <checkbox-group bindchange="changeChecked" data-id="{{item.goods_id}}">
-            <checkbox checked="{{item.checked}}"/>
-          </checkbox-group>
-        </view>
-        <!-- 图片 -->
-        <navigator url="/pages/goods_detail/goods_detail?goods_id={{item.goods_id}}" class="item_img">
-          <image src="http://image5.suning.cn/uimg/b2c/newcatentries/0000000000-000000000160455569_1_400x400.jpg" mode="widthFix" />
-        </navigator>
-        <!-- 商品信息 -->
-        <view class="item_info">
-          <view class="info_top">
-            {{item.goods_name}}
+      <block wx:if="{{cartList.length > 0}}">
+        <view class="cart_item" wx:for="{{cartList}}" wx:key="goods_id">
+          <!-- 复选框 -->
+          <view class="checkbox">
+            <checkbox-group bindchange="changeChecked" data-id="{{item.goods_id}}">
+              <checkbox checked="{{item.checked}}"/>
+            </checkbox-group>
           </view>
-          <view class="info_bottom">
-            <view class="item_price">￥{{item.goods_price}}</view>
-            <view class="item_step">
-              <view class="step_text" bindtap="handleAddCart" data-id="{{item.goods_id}}" data-step="{{-1}}">-</view>
-              <view class="step_text">{{item.num}}</view>
-              <view class="step_text" bindtap="handleAddCart" data-id="{{item.goods_id}}" data-step="{{1}}">+</view>
+          <!-- 图片 -->
+          <navigator url="/pages/goods_detail/goods_detail?goods_id={{item.goods_id}}" class="item_img">
+            <image src="http://image5.suning.cn/uimg/b2c/newcatentries/0000000000-000000000160455569_1_400x400.jpg" mode="widthFix" />
+          </navigator>
+          <!-- 商品信息 -->
+          <view class="item_info">
+            <view class="info_top">
+              {{item.goods_name}}
+            </view>
+            <view class="info_bottom">
+              <view class="item_price">￥{{item.goods_price}}</view>
+              <view class="item_step">
+                <view class="step_text" bindtap="handleAddCart" data-id="{{item.goods_id}}" data-step="{{-1}}">-</view>
+                <view class="step_text">{{item.num}}</view>
+                <view class="step_text" bindtap="handleAddCart" data-id="{{item.goods_id}}" data-step="{{1}}">+</view>
+              </view>
             </view>
           </view>
         </view>
-      </view>
+      </block>
+      <block wx:else>
+        <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603200901535&di=d22ddc3d126b891a343b494b1efb4fc3&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fe1b1467beea0a9c7d6a56b32bac6d7e5dcd914f7c3e6-YTwUd6_fw658" mode="widthFix"></image>
+      </block>
     </view>
   </view>
   <!-- 底部 -->
@@ -55,7 +60,7 @@
       </view>
       <view class="total_price_text1">包含运费</view>
     </view>
-    <view class="total_pay">
+    <view class="total_pay" bindtap="handleSubmit">
       结算({{totalNum}})
     </view>
   </view>

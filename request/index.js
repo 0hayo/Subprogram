@@ -11,6 +11,7 @@ export const request = (params) => {
       ...params,
       url: baseUrl + params.url,
       success: (result)=>{
+        console.log(result)
         resolve(result.data.message)
       },
       fail: (err)=>{

@@ -1,2 +1,46 @@
-<!--pages/pay/pay.wxml-->
-<text>pages/pay/pay.wxml</text>
+<view class="pay">
+  <view class="address">
+    <view class="address_info">
+      <view class="user_info">
+        <view>收货人：{{address.userName}}</view>
+        <view>{{address.telNumber}}</view>
+      </view>
+      <view class="user_address">{{address.allAddress}}</view>
+    </view>
+  </view>
+  <view class="cart_contetn">
+    <view class="cart_title">购物车</view>
+    <view class="cart_main">
+      <view class="cart_item" wx:for="{{cartList}}" wx:key="goods_id">
+        <!-- 图片 -->
+        <navigator url="/pages/goods_detail/goods_detail?goods_id={{item.goods_id}}" class="item_img">
+          <image src="http://image5.suning.cn/uimg/b2c/newcatentries/0000000000-000000000160455569_1_400x400.jpg" mode="widthFix" />
+        </navigator>
+        <!-- 商品信息 -->
+        <view class="item_info">
+          <view class="info_top">
+            {{item.goods_name}}
+          </view>
+          <view class="info_bottom">
+            <view class="item_price">￥{{item.goods_price}}</view>
+            <view class="item_step">
+              <view class="step_text">x{{item.num}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 底部 -->
+  <view class="footer">
+    <view class="total_price_wrap">
+      <view class="total_price">
+        合计：<text class="total_price_text">￥{{totalPrice}}</text>
+      </view>
+      <view class="total_price_text1">包含运费</view>
+    </view>
+    <view class="total_pay" bindtap="handleOrderPay">
+      结算({{totalNum}})
+    </view>
+  </view>
+</view>
